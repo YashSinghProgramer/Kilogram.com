@@ -1,0 +1,139 @@
+.test{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    overflow-x: scroll;
+    justify-content: flex-start;
+    align-items: center;
+    scrollbar-width: none;
+}
+
+
+.reelcon{
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 12px;
+    transition: all 0.8s ease;
+    /* background-color: white; */
+    height: 95%;
+    width: 50%;
+    /* border-radius: 25px; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.reelhead{
+    color: white;
+    /* background-color: aqua; */
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.reelhead1{
+    margin-left: 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+gap:8px;
+}
+
+.reelhead1>img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.reelhead1>p{
+    cursor: pointer;
+    font-size: small;
+    font-weight: 500;
+}
+.reelhead>h2{
+      cursor: pointer;
+    margin-right: 12px;
+}
+.reelimg{
+    height: 55%;
+    /* background-color: aquamarine; */
+    width: 100%;
+}
+.reelimg>img{
+
+    height: 100%;
+    /* background-color: aquamarine; */
+    width: 100%;
+    border-radius: 5px;
+    object-fit: fill;
+}
+.interaction{
+    transition: all 1s ease-in;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 5%;
+    /* background-color: aqua; */
+}
+.inter1>img,.inter2>img{
+     transition: all 1s ease-in;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    
+}
+
+
+.text{
+    transition: all 1s ease-in;
+    /* background-color: aquamari/ne; */
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    gap:8px;
+}
+.text1{
+     transition: all 1s ease-in;
+    gap:4px;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 5px; */
+    width: 90%;
+    justify-content: center;
+    
+    /* overflow-y: ; */
+}
+.text1>h5>span{
+    
+    /* background-color: aqua; */
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    font-size: medium;
+    text-overflow: ellipsis;
+
+}
+.text1>h5{
+    transition: all 0.5s ease;
+    font-weight: 600;
+}
+.text1>h2{
+    transition: all 0.5s ease;
+    color: rgba(128, 128, 128, 0.87);
+margin-left: 2px;
+font-size: 12px;
+text-overflow: ellipsis;
+font-weight: 400;
+}
+p{
+    color: rgba(128, 128, 128, 0.87);
+margin-left: 2px;
+font-size: 1px;
+font-weight: 100;
+}

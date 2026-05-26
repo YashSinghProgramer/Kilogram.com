@@ -1,0 +1,132 @@
+.messageCon{
+   
+    height: 100%;
+    width: 30%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   
+}
+.allmessage{
+    
+    height: 90%;
+    width: 90%;
+    /* background-color: blue; */
+    padding: 10px;
+}
+
+.profile{
+    height: 10%;
+    width: 90%;
+    padding: 8px;
+    /* background-color: black; */
+    display: flex;
+    gap: 12px;
+padding: 12px;
+    justify-content: center;
+    align-items: center;
+}
+.profile>img ,.otherproser>img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.profile>h5,.otherproser>h2{
+    cursor: pointer;
+    /* margin-left: 8px; */
+    font-size: 13px;
+    font-weight: 500;
+color: rgba(62, 96, 247, 0.945);
+}
+.usernames{
+    
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    /* background-color: blueviolet; */
+}
+.usernames>h3{
+    color: white;
+    font-size: medium;
+    font-weight: 500;
+}
+.usernames>h6{
+    color: gray;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.otherprofile{
+    height: 80%;
+    width: 90%;
+/* background-color: aqua; */
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+
+gap: 10px;
+flex-direction: column;
+}
+.profiletext{
+    padding: 4px;
+    width: 90%;
+    height: 10%;
+    color: white;
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 120px;
+}
+.profiletext>h1{
+    font-size: medium;
+    font-weight: 600;
+
+}
+.profiletext>h6{
+    font-size: small;
+    font-weight: 500;
+}
+.otherusers{
+    height: 60%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+ .otherproser{
+ height: 10%;
+    width: 96%;
+    padding: 8px;
+    /* background-color: black; */
+    display: flex;
+    gap: 12px;
+padding: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer{
+    height: 15%;
+    width: 89%;
+    /* background-color: aquamarine; */
+    color: gray;
+   flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap :10px;
+    
+}
+.footer>h1,p{
+    cursor: pointer;
+ font-size: 14px;
+ font-weight: 500;
+ 
+}

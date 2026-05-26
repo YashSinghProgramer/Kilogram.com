@@ -1,0 +1,28 @@
+.mainscreen{
+    height: 100vh;
+    width:100vw;
+    background: rgba(0, 0, 0, 0.794);
+    display: flex;
+    /* animation: fadein 1s 1 ease-in; */
+    transition: all 0.5 ease;
+}
+.rightside{
+    background-color: black;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2%;
+}
+@keyframes fadein {
+    0%{
+        
+        opacity: 0;
+    }
+    
+    100%{
+        opacity: 1;
+    }
+}
+
