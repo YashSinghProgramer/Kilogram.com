@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from './Login/login.jsx'
-import Mainpage from './main/mainapp.jsx'
+import Mainpage from '../src/main/mainapp.jsx'
 import {  Route, Routes } from 'react-router-dom'
 function App() {
   return (
