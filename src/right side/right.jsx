@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import style from './right.module.css'
 import { Link } from 'react-router-dom';
-import Main from '../main/mainapp.jsx'
+import main from '../main/mainapp.jsx'
 function Right() {
   
  const norefersh=(e)=>{
@@ -16,7 +16,7 @@ function Right() {
   <form className={style.logform} onSubmit={norefersh}>
     <input type='text' placeholder='Mobile number,username or email'/>
     <input type='password' placeholder='Password'/>
-    <Link to='/Main'><button type='submit' className={style.login}> Log in</button></Link>
+    <Link to='/main'><button type='submit' className={style.login}> Log in</button></Link>
 
   <h2>Forgot password?</h2>
   </form>
