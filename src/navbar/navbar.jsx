@@ -24,6 +24,7 @@ function navbar() {
 					</Link>
 					<li>
 						<img
+							className={Style.reel}
 							src="https://img.icons8.com/?size=100&id=bgJJTYimOf01&format=png&color=ffffff"
 							alt="Logo"
 						/>
@@ -31,6 +32,7 @@ function navbar() {
 					</li>
 					<li>
 						<img
+							className={Style.Messages}
 							src="https://img.icons8.com/?size=100&id=12628&format=png&color=ffffff"
 							alt="Logo"
 						/>
@@ -45,6 +47,7 @@ function navbar() {
 					</li>
 					<li>
 						<img
+							className={Style.Explore}
 							src="https://img.icons8.com/?size=100&id=88004&format=png&color=ffffff"
 							alt="Logo"
 						/>
@@ -66,6 +69,7 @@ function navbar() {
 					</li>
 					<li>
 						<img
+							className={Style.Deshboard}
 							src="https://img.icons8.com/?size=100&id=59735&format=png&color=ffffff"
 							alt="Logo"
 						/>
