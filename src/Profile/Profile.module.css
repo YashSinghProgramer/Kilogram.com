@@ -191,3 +191,111 @@
 	height: 200px;
 	flex-direction: row;
 }
+
+@media (max-width: 768px) {
+	/* Main container se side navigation ka access hatao */
+	.con {
+		flex-direction: column;
+	}
+
+	/* Side wala navbar container mobile par space na ghere */
+	.proNavbar {
+		display: none; /* Kyunki bottom navbar navigation handle kar raha hai */
+	}
+
+	/* Main content area ko poori screen dena aur bottom navbar ke liye padding */
+	.HF {
+		width: 100%;
+		padding-bottom: 60px; /* Taaki bottom navbar posts ko na chupaye */
+	}
+
+	/* Profile Header padding thodi kam */
+	.Profiledata {
+		width: 100%;
+		padding: 20px 10px;
+		min-height: auto;
+	}
+
+	/* Profile pic aur text ko vertical align karna */
+	.prof {
+		flex-direction: column;
+		gap: 20px;
+		width: 100%;
+		text-align: center; /* Sab kuch center mein inline dikhe */
+	}
+
+	/* Profile Image Container ka size thoda chota mobile ke liye */
+	.imagesofprofile {
+		width: 120px;
+		height: 120px;
+	}
+
+	/* Plus icon ki position choti image ke hisab se set karna */
+	.plus {
+		height: 25px;
+		width: 25px;
+		top: 70%;
+		right: 10%;
+	}
+
+	/* Profile text settings */
+	.profiletext {
+		align-items: center;
+		gap: 8px;
+	}
+
+	.username {
+		font-size: xl;
+	}
+
+	/* Followers aur posts count ko screen ke hisab se center karna */
+	.follow {
+		justify-content: center;
+		gap: 20px;
+		width: 100%;
+	}
+
+	.follow > h3 {
+		font-size: 14px;
+	}
+
+	/* Edit Profile Buttons ko responsive banana */
+	.profilebtn {
+		width: 100%;
+		justify-content: center;
+		margin-top: 15px;
+		padding: 0 15px;
+	}
+
+	.profilebtn > button {
+		flex: 1; /* Dono buttons barabar width le lenge */
+		font-size: 14px;
+		height: 36px;
+		margin: 10px;
+	}
+
+	/* --- POSTS SECTION RESPONSIVE --- */
+	.postcon {
+		width: 100%; /* Mobile par side margins hatayein */
+		gap: 3px; /* Chota premium gap */
+		padding: 15px 0;
+	}
+
+	/* Perfect Instagram 3-Column Square Grid */
+	.postcon > img {
+		width: calc(33.33% - 2px); /* Ek line mein exactly 3 images */
+		height: auto; /* Fix height hatayi */
+		aspect-ratio: 1 / 1; /* Image ko perfectly square rakhne ke liye */
+	}
+
+	/* Footer adjustments */
+	.footerCon {
+		width: 90%;
+		padding: 20px 0;
+	}
+
+	.footerCon h4 {
+		gap: 8px;
+		font-size: 11px;
+	}
+}
