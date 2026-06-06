@@ -108,3 +108,71 @@ h4 > img {
 	border-radius: 50%;
 	overflow: hidden;
 }
+
+@media (max-width: 768px) {
+	/* 1. Navbar ko niche fix karne ke liye */
+	.NavCon {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		height: 60px; /* Choti height */
+		width: 100%; /* Poori screen width */
+		flex-direction: row; /* Column se Row tak (Horizontal layout) */
+		justify-content: space-around; /* Saare icons barabar doori par */
+		align-items: center;
+		border-top: 1px solid #333; /* Halka divider */
+		z-index: 1000; /* Taaki ye baaki content ke upar dikhe */
+		padding: 0 10px;
+	}
+
+	/* 2. Logo aur H4 (More) ko hide karne ke liye */
+	.logo,
+	h4 {
+		display: none !important;
+	}
+
+	/* 3. Menulist container ko set karne ke liye */
+	.menulist {
+		min-height: auto;
+		height: 100%;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* 4. UL ko row mein karke poori width dena */
+	.menulist > ul {
+		flex-direction: row; /* Horizontal icons */
+		justify-content: space-around;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		gap: 0;
+	}
+	.reel,
+	.Messages,
+	.Deshboard,
+	.Explore {
+		display: none;
+	}
+	/* 5. Text ko hide karna aur sirf icon dikhana */
+	.menulist > ul > li,
+	.proli,
+	.home {
+		font-size: 0; /* Isse text dikhna band ho jayega */
+		width: auto;
+		padding: 10px;
+		margin: 0;
+		justify-content: center;
+	}
+
+	/* Hover effect ko mobile ke hisab se chota karna */
+	.menulist > ul > li:hover,
+	.home:hover,
+	.proli:hover {
+		background: transparent; /* Mobile par dark hover accha nahi lagta */
+		transform: scale(1.1); /* Halka sa zoom effect icon par */
+	}
+}

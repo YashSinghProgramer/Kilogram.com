@@ -5,8 +5,8 @@ import Rightside from "../right side/right.jsx";
 function login() {
 	return (
 		<div className={style.Con}>
-			<Leftside className={style.lefft} />
-			<Rightside className={style.right} />
+			<Leftside />
+			<Rightside />
 		</div>
 	);
 }

@@ -175,3 +175,9 @@ h5 > img {
 	font-size: medium;
 	color: red;
 }
+
+@media (max-width: 768px) {
+	.rightcon {
+		width: 100%;
+	}
+}
