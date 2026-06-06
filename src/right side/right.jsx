@@ -52,6 +52,7 @@ function Right() {
 	return (
 		<div className={style.rightcon}>
 			<div className={style.dete}>
+				<p className={style.loginHeading}>Log into Kilogram</p>
 				<h4>Log into Kilogram</h4>
 				<div>
 					<form className={style.logform} onSubmit={norefersh}>

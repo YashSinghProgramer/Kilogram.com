@@ -175,9 +175,30 @@ h5 > img {
 	font-size: medium;
 	color: red;
 }
-
 @media (max-width: 768px) {
 	.rightcon {
 		width: 100%;
+	}
+	.dete {
+		display: flex;
+		flex-direction: column;
+		height: 90%;
+	}
+	.loginHeading {
+		font-size: large;
+		color: white;
+		font-weight: 500;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.logbtn > img {
+		display: none;
+	}
+}
+@media (min-width: 768px) {
+	.loginHeading {
+		display: none;
 	}
 }
