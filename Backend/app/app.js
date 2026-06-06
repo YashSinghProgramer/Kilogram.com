@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 const PostModel = require("../DataBase/Post.js");
 const CommentModel = require("../DataBase/Comments.js");
 const multer = require("multer");
-const uploadImage = require("../Database/imagekit.js");
+const uploadImage = require("../DataBase/imagekit.js");
 require("dotenv").config();
 const app = express();
 
