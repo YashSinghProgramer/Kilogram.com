@@ -26,7 +26,7 @@ function Profile() {
 
 				// FIXED: URL port changed to 5000 & config structure fixed
 				const response = await axios.get(
-					"https://kilogram-com-1.onrender.com//getprofile",
+					"https://kilogram-com-1.onrender.com/getprofile",
 					{
 						headers: {
 							Authorization: `Bearer ${token}`, // Token passing to backend
