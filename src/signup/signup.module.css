@@ -1,0 +1,113 @@
+.con {
+	transition: all 0.6s ease;
+	background: rgb(20, 20, 20);
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: sans-serif;
+	padding-top: 5%;
+	color: white;
+}
+.Contantcon {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-direction: column;
+	gap: 8px;
+}
+input {
+	height: 30px;
+	width: 90%;
+	padding: 15px;
+	background: transparent;
+	border: 1px solid gray;
+	border-radius: 16px;
+	color: rgba(128, 128, 128, 0.692);
+	font-size: 16px;
+	font-weight: 600;
+	outline: none;
+	margin: 9px 0px;
+}
+input:focus {
+	border: 1px solid rgb(0, 89, 255);
+	color: white;
+}
+.h3 > span {
+	color: rgb(65, 130, 252);
+	cursor: pointer;
+}
+.h3 > span:hover {
+	text-decoration: underline;
+}
+.error {
+	color: red;
+}
+.h3 {
+	color: white;
+	font-size: 19px;
+	font-weight: 500;
+	margin-top: 12px;
+}
+button {
+	transition: all 0.5s ease;
+	width: 90%;
+	height: 42px;
+	padding: 20px;
+	border: none;
+	color: white;
+	font-size: 19px;
+	font-weight: 400;
+	border-radius: 18px;
+	margin-top: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.submitbtn {
+	background-color: rgb(0, 89, 255);
+}
+.submitbtn:hover {
+	background-color: rgb(45, 109, 230);
+}
+.btn2 {
+	background: transparent;
+	outline: 1px solid gray;
+}
+.btn2:hover {
+	background-color: rgba(128, 128, 128, 0.2);
+}
+.img,
+.imgarr {
+	transition: all 0.5s ease;
+	height: 23px;
+	padding: 10px;
+	width: 23px;
+	border-radius: 50%;
+}
+
+.h2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.h1 {
+	font-size: 26px;
+	font-weight: 500;
+}
+
+.h4 {
+	font-size: 18px;
+	font-weight: 400;
+}
+.imgarr:hover {
+	background: rgba(143, 143, 143, 0.2);
+}
