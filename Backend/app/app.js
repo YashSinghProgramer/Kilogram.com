@@ -17,7 +17,7 @@ const app = express();
 // Middleware
 const corsOptions = {
 	// * hata kar exact apne frontend ka URL likhein
-	origin: "https://kilogramcom.vercel.app/",
+	origin: "https://kilogramcom.vercel.app",
 	credentials: true, // Taaki cookies/headers allow ho sakein
 	methods: "GET,POST,PUT,DELETE",
 	allowedHeaders: "Content-Type,Authorization",
