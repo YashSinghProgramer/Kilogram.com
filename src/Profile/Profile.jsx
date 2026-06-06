@@ -25,12 +25,15 @@ function Profile() {
 				}
 
 				// FIXED: URL port changed to 5000 & config structure fixed
-				const response = await axios.get("http://localhost:5000/getprofile", {
-					headers: {
-						Authorization: `Bearer ${token}`, // Token passing to backend
-						"Content-Type": "application/json",
+				const response = await axios.get(
+					"https://kilogram-com-1.onrender.com//getprofile",
+					{
+						headers: {
+							Authorization: `Bearer ${token}`, // Token passing to backend
+							"Content-Type": "application/json",
+						},
 					},
-				});
+				);
 
 				const data = response.data;
 
