@@ -3,7 +3,7 @@
 }
 @media (max-width: 768px) {
 	.lefft {
-		display: none;
+		display: none !important;
 	}
 	.right {
 		height: 100%;
