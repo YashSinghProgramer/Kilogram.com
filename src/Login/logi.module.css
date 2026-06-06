@@ -1,4 +1,12 @@
-.Con{
-    display: flex;
-    
+.Con {
+	display: flex;
+}
+@media (max-width: 768px) {
+	.lefft {
+		display: none;
+	}
+	.right {
+		height: 100%;
+		width: 100%;
+	}
 }
