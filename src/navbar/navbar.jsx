@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Style from "./nav.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Navbar() {
+	const navigate = useNavigate();
 	const [profile, setProfile] = useState("");
 	function logout() {
 		navigate("/");
