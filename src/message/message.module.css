@@ -29,6 +29,8 @@
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
+	aspect-ratio: 1/1;
+	object-fit: fill;
 }
 .profile > h5,
 .otherproser > h2 {

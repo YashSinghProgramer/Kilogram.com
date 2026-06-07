@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Profilecss from "./Profile.module.css";
 import Navbar from "../navbar/navbar.jsx";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Profile() {
 	const [userData, setUserData] = useState({
@@ -9,13 +10,13 @@ function Profile() {
 		name: "Loading...",
 		bio: "",
 		posts: [],
+		profilepic: "",
 	});
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchProfileData = async () => {
 			try {
-				// LocalStorage se token pull kiya
 				const token = localStorage.getItem("token");
 
 				if (!token) {
@@ -24,12 +25,11 @@ function Profile() {
 					return;
 				}
 
-				// FIXED: URL port changed to 5000 & config structure fixed
 				const response = await axios.get(
 					"https://kilogram-com-1.onrender.com/getprofile",
 					{
 						headers: {
-							Authorization: `Bearer ${token}`, // Token passing to backend
+							Authorization: `Bearer ${token}`,
 							"Content-Type": "application/json",
 						},
 					},
@@ -37,11 +37,13 @@ function Profile() {
 
 				const data = response.data;
 
+				// Backend 'success: true' bhejta hai
 				if (data.success) {
 					setUserData({
 						username: data.username,
 						name: data.name,
 						bio: data.bio,
+						profilepic: data.profilepic, // Backend se mila hua string URL
 						posts: data.posts || [],
 					});
 				}
@@ -74,14 +76,19 @@ function Profile() {
 							<div className={Profilecss.imagesofprofile}>
 								<img
 									className={Profilecss.profileimg}
-									src="https://picsum.photos/200"
+									src={
+										userData.profilepic ||
+										"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150"
+									}
 									alt="profile"
 								/>
-								<img
-									src="https://img.icons8.com/?size=100&id=oqWjYJSQSZAj&format=png&color=ffffff"
-									alt="Plus"
-									className={Profilecss.plus}
-								/>
+								<Link to={"/Uplode"} className={Profilecss.plus}>
+									<img
+										src="https://img.icons8.com/?size=100&id=oqWjYJSQSZAj&format=png&color=ffffff"
+										alt="Plus"
+										className={Profilecss.plus}
+									/>
+								</Link>
 							</div>
 							<div className={Profilecss.profiletext}>
 								<h2 className={Profilecss.username}>{userData.username}</h2>

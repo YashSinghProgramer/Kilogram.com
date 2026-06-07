@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./nav.module.css";
 import { Link } from "react-router-dom";
-function navbar() {
+import axios from "axios";
+
+function Navbar() {
+	const [profile, setProfile] = useState("");
+
+	useEffect(() => {
+		const fetchNavbarProfile = async () => {
+			try {
+				const token = localStorage.getItem("token");
+				if (!token) return;
+
+				const response = await axios.get(
+					"https://kilogram-com-1.onrender.com/getprofile",
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+							"Content-Type": "application/json",
+						},
+					},
+				);
+
+				const data = response.data;
+
+				if (data.success) {
+					setProfile(data.profile || data.profilepic);
+				}
+			} catch (err) {
+				console.error("Navbar profile fetch failed:", err);
+			}
+		};
+
+		fetchNavbarProfile();
+	}, []);
+
 	return (
 		<div className={Style.NavCon}>
 			<div className={Style.logo}>
@@ -58,7 +91,7 @@ function navbar() {
 							src="https://img.icons8.com/?size=100&id=16076&format=png&color=ffffff"
 							alt="Logo"
 						/>
-						Notificatons
+						Notifications
 					</li>
 					<li>
 						<img
@@ -78,8 +111,11 @@ function navbar() {
 					<Link to={"/Profile"} className={Style.profilelink}>
 						<li className={Style.proli}>
 							<img
-								src="https://picsum.photos/200"
-								alt="Logo"
+								src={
+									profile ||
+									"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=50"
+								}
+								alt="Profile"
 								className={Style.prologo}
 							/>
 							Profile
@@ -94,10 +130,8 @@ function navbar() {
 				/>
 				More
 			</h4>
-
-			<div></div>
 		</div>
 	);
 }
 
-export default navbar;
+export default Navbar;

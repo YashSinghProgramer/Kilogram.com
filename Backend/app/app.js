@@ -16,9 +16,9 @@ const app = express();
 
 // Middleware
 const corsOptions = {
-	// * hata kar exact apne frontend ka URL likhein
-	origin: "https://kilogramcom.vercel.app",
-	credentials: true, // Taaki cookies/headers allow ho sakein
+	origin: "https://kilogramcom.vercel.app", // Production ke liye
+	// origin: "http://localhost:5173", // Local development ke liye
+	credentials: true,
 	methods: "GET,POST,PUT,DELETE",
 	allowedHeaders: "Content-Type,Authorization",
 };
@@ -28,25 +28,27 @@ app.use(express.json());
 app.use(cookieParser());
 const upload = multer({ storage: multer.memoryStorage() });
 
-const JWT_SECRET = "LodaLasan"; // Ek jagah fix kar diya variable me
-
 // 1. User Registration
 app.post("/signup", async (req, res) => {
 	const { username, email, password, name } = req.body;
 
+	if (!username || !email || !password) {
+		return res.status(400).json({ message: "All fields are required" });
+	}
+
 	try {
+		const normalizedUsername = username.trim().toLowerCase();
 		const userExists = await userModel.findOne({
-			username: username.toLowerCase(),
+			username: normalizedUsername,
 		});
-		console.log(username);
+
 		if (userExists) {
 			return res.status(400).json({ message: "Username already exists" });
-			console.log(userExists);
 		}
 
 		const hash = await bcrypt.hash(password, 10);
 		await userModel.create({
-			username: username.toLowerCase(),
+			username: normalizedUsername,
 			email: email,
 			password: hash,
 			name: name,
@@ -54,83 +56,106 @@ app.post("/signup", async (req, res) => {
 
 		return res.status(201).json({ message: "User registered successfully" });
 	} catch (error) {
+		console.error("Signup Error:", error);
 		return res
 			.status(500)
 			.json({ message: "Error occurred while registering user" });
 	}
 });
 
-// 2. User Login (FIXED)
+// 2. User Login
 app.post("/login", async (req, res) => {
 	const { username, password } = req.body;
 
-	if (!username || username.trim() === "") {
-		return res.status(400).json({ message: "Please Enter username" });
+	if (!username || username.trim() === "" || !password) {
+		return res
+			.status(400)
+			.json({ message: "Please enter username and password" });
 	}
 
 	try {
-		const user = await userModel.findOne({ username: username });
+		// FIXED: .toLowerCase() lagaya taaki case-matching issue na ho
+		const normalizedUsername = username.trim().toLowerCase();
+		const user = await userModel.findOne({ username: normalizedUsername });
+
 		if (!user) {
 			return res.status(400).json({ message: "Invalid username or password" });
 		}
 
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 		if (!isPasswordValid) {
-			return res.status(400).json({ message: "Invalid Password" });
+			return res.status(400).json({ message: "Invalid username or password" });
 		}
 
-		// FIXED: 'user.username' use kiya na ki model
 		const token = jwt.sign(
 			{ username: user.username },
 			process.env.JWT_SECRET,
-			{
-				expiresIn: "1h",
-			},
+			{ expiresIn: "1h" },
 		);
 
-		// FIXED: Cookie pehle set hogi, fir final response jayega
-		res.cookie("token", token, { httpOnly: true, secure: false }); // development me secure false thik h
+		res.cookie("token", token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production", // Production me true hoga
+			sameSite: "lax",
+		});
 
 		return res.status(200).json({
 			message: "Login successful",
-			token: token, // Frontend par localStorage me rakhne ke liye token response me bhi de diya
+			token: token,
 		});
 	} catch (error) {
+		console.error("Login Error:", error);
 		return res.status(500).json({ message: "Server error during login" });
 	}
 });
 
-// 3. Profile Upload (FIXED Syntax & Multer)
+// 3. Profile Upload
 app.post("/profileupload", upload.single("profilePic"), async (req, res) => {
 	try {
 		if (!req.file) {
 			return res.status(400).json({ message: "Please upload an image" });
 		}
 
-		const img_url = await uploadImage(req.file.buffer);
-		const { bio, post } = req.body; // FIXED: Proper Javascript destructuring
-
 		const authHeader = req.headers.authorization;
 		if (!authHeader || !authHeader.startsWith("Bearer ")) {
-			return res.status(401).json({ message: "Authentication failed!" });
+			return res
+				.status(401)
+				.json({ message: "Authentication failed! No token provided." });
 		}
 
 		const token = authHeader.split(" ")[1];
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+		let decoded;
+		try {
+			decoded = jwt.verify(token, process.env.JWT_SECRET);
+		} catch (jwtErr) {
+			return res.status(401).json({ message: "Invalid or Expired Token!" });
+		}
+
 		const username = decoded.username;
 
-		// FIXED: Typo handled (img_url used properly)
-		const updatedUser = await userModel.findOneAndUpdate(
-			{ username: username },
-			{
-				$set: {
-					profile: img_url,
-					bio: bio,
-					post: post,
-				},
-			},
-			{ new: true },
-		);
+		// ImageKit Upload
+		console.log("Uploading image to ImageKit...");
+		const img_data = await uploadImage(req.file.buffer); // Iska naam img_data rakh dete hain clearity ke liye
+		console.log("Image uploaded successfully!");
+
+		const { bio } = req.body;
+
+		// FIXED: Pure object ki jagah sirf .url nikal kar save kar rahe hain
+		const updateData = {
+			profilepic: img_data.url, // <-- YAHAN CHANGE KIYA HAI
+		};
+
+		if (bio) updateData.bio = bio;
+
+		// Mongoose warning ko hatane ke liye returnDocument: 'after' use kiya hai
+		const updatedUser = await userModel
+			.findOneAndUpdate(
+				{ username: username },
+				{ $set: updateData },
+				{ returnDocument: "after" }, // Mongoose warning fix here
+			)
+			.select("-password");
 
 		if (!updatedUser) {
 			return res.status(404).json({ message: "User not found!" });
@@ -141,12 +166,17 @@ app.post("/profileupload", upload.single("profilePic"), async (req, res) => {
 			user: updatedUser,
 		});
 	} catch (error) {
+		console.error("--- SERVER ERROR 500 DETAILS ---");
 		console.error(error);
-		return res.status(500).json({ message: "Server error or Invalid Token!" });
+		console.error("--------------------------------");
+		return res.status(500).json({
+			message: "Server error during profile update!",
+			error: error.message,
+		});
 	}
 });
 
-// 4. Get Profile Data (FIXED DB Fetching)
+// 4. Get Profile Data
 app.get("/getprofile", async (req, res) => {
 	try {
 		const authHeader = req.headers.authorization;
@@ -155,28 +185,43 @@ app.get("/getprofile", async (req, res) => {
 		}
 
 		const token = authHeader.split(" ")[1];
-		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-		const username = decoded.username;
 
-		// FIXED: Pehle user database se dhundho tabhi toh bio/profile milegi!
-		const user = await userModel.findOne({ username: username });
+		let decoded;
+		try {
+			decoded = jwt.verify(token, process.env.JWT_SECRET);
+		} catch (jwtErr) {
+			return res.status(401).json({ message: "Invalid or Expired Token!" });
+		}
+
+		const username = decoded.username;
+		const user = await userModel
+			.findOne({ username: username })
+			.select("-password");
+
 		if (!user) {
 			return res.status(404).json({ message: "User not found" });
 		}
 
-		// Assuming aapne PostModel banaya hai user ke posts store karne k liye
 		const posts = await PostModel.find({ username: username });
 
 		return res.status(200).json({
 			success: true,
 			username: user.username,
-			name: user.name || " ", // DB me name field ho toh user.name chalega
+			name: user.name || "",
 			bio: user.bio || "No bio yet",
+			profilepic: user.profile || user.profilepic,
 			posts: posts || [],
 		});
 	} catch (error) {
-		return res.status(401).json({ message: "Invalid or Expired Token!" });
+		console.error("Get Profile Error:", error);
+		return res.status(500).json({ message: "Server Error!" });
 	}
+});
+
+// SERVER START (Agar aap is file ko main file ki tarah run kar rahe hain)
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+	console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = app;
