@@ -5,7 +5,10 @@ import axios from "axios";
 
 function Navbar() {
 	const [profile, setProfile] = useState("");
-
+	function logout() {
+		navigate("/");
+		localStorage.removeItem("token");
+	}
 	useEffect(() => {
 		const fetchNavbarProfile = async () => {
 			try {
@@ -123,12 +126,12 @@ function Navbar() {
 					</Link>
 				</ul>
 			</div>
-			<h4>
+			<h4 onDoubleClick={logout}>
 				<img
-					src="https://img.icons8.com/?size=100&id=S5biqohaDgd1&format=png&color=ffffff"
+					src="https://img.icons8.com/?size=100&id=vcvBMGD6n6ZL&format=png&color=ffffff"
 					alt="logo"
 				/>
-				More
+				Logout
 			</h4>
 		</div>
 	);

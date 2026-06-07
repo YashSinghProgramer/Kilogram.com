@@ -4,7 +4,7 @@ import Mainpage from "./main/mainapp.jsx";
 import Signup from "./signup/signup.jsx";
 import Profile from "./Profile/Profile.jsx";
 import Uplode from "./Profile/uplode.jsx";
-import ProtectedRoute from "./protectrouter.jsx";
+import ProtectedRoute from "./protectrouter.jsx ";
 import { Route, Router, Routes } from "react-router-dom";
 function App() {
 	return (
