@@ -9,11 +9,13 @@ function Right() {
 	const [password, setpassword] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [userError, setuserError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const norefersh = async (e) => {
 		e.preventDefault();
 		try {
-			// FIXED: check kar lena backend ka port 3000 h ya 5000
+			setIsLoading(true);
+
 			const response = await axios.post(
 				"https://kilogram-com-1.onrender.com/login",
 				{ username, password },
@@ -23,7 +25,6 @@ function Right() {
 			setpassword("");
 
 			if (response.data.message === "Login successful") {
-				// FIXED: Agar backend token de rha h, toh use localStorage me daal do profile page k liye
 				if (response.data.token) {
 					localStorage.setItem("token", response.data.token);
 				}
@@ -40,6 +41,7 @@ function Right() {
 			setTimeout(() => {
 				setuserError(false);
 			}, 4000);
+			setIsLoading(false);
 		}
 	};
 
@@ -76,8 +78,8 @@ function Right() {
 								<p className={style.error}>Invalid username or password</p>
 							)}
 						</div>
-						<button type="submit" className={style.login}>
-							Log in
+						<button type="submit" disabled={isLoading} className={style.login}>
+							{isLoading ? <div className={style.spinner}></div> : "Log In"}
 						</button>
 
 						<h2>Forgot password?</h2>

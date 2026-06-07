@@ -205,3 +205,27 @@ h5 > img {
 		display: none;
 	}
 }
+
+/* Button jab disabled ho tab thoda alag dikhe */
+.loginBtn:disabled {
+	background-color: #555555;
+	cursor: not-allowed;
+}
+
+/* Spinner ka gol dabba aur size */
+.spinner {
+	width: 20px;
+	height: 20px;
+	border: 3px solid rgba(255, 255, 255, 0.3); /* Dhundla border */
+	border-radius: 50%;
+	border-top-color: #ffffff; /* Sirf upar ka border white hoga */
+	animation: spin 0.8s linear infinite; /* Gol ghumane ki animation */
+	margin: 0 auto; /* Button ke center me rakhne ke liye */
+}
+
+/* Ghumane wali keyframes animation */
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
