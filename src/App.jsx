@@ -6,6 +6,7 @@ import Profile from "./Profile/Profile.jsx";
 import Uplode from "./Profile/uplode.jsx";
 
 import { Route, Router, Routes } from "react-router-dom";
+// import ProtectedRoute from "./protectrouter.jsx";
 import ProtectedRoute from "./protectrouter.jsx";
 function App() {
 	return (
