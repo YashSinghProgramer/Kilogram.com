@@ -198,11 +198,6 @@
 		flex-direction: column;
 	}
 
-	/* Side wala navbar container mobile par space na ghere */
-	.proNavbar {
-		display: none; /* Kyunki bottom navbar navigation handle kar raha hai */
-	}
-
 	/* Main content area ko poori screen dena aur bottom navbar ke liye padding */
 	.HF {
 		width: 100%;

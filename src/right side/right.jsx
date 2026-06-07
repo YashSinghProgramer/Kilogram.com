@@ -91,7 +91,7 @@ function Right() {
 						/>{" "}
 						Log in with Facebook
 					</button>
-					<Link to={"/signup"}>
+					<Link to={"/signup"} className={style.Link}>
 						<button className={style.crebtn}> Create new account</button>{" "}
 					</Link>
 				</div>

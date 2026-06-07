@@ -16,7 +16,7 @@ const app = express();
 
 // Middleware
 const corsOptions = {
-	origin: "https://kilogramcom.vercel.app", // Production ke liye
+	origin: "https://kilogramcom.vercel.app" || "http://localhost:5173", // Production ke liye
 	// origin: "http://localhost:5173", // Local development ke liye
 	credentials: true,
 	methods: "GET,POST,PUT,DELETE",

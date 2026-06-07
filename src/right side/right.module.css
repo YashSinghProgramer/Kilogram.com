@@ -142,6 +142,9 @@
 	font-weight: 600;
 	text-decoration: none;
 }
+.Link {
+	text-decoration: none;
+}
 .crebtn:hover {
 	background: rgba(128, 128, 128, 0.15);
 }

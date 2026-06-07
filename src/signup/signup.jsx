@@ -119,7 +119,7 @@ function Signup() {
 					<button type="submit" className={StyleSign.submitbtn}>
 						Submit
 					</button>
-					<Link to={"/"}>
+					<Link to={"/"} className={StyleSign.Link}>
 						{/* type="button" lagaya taaki ye button form ko submit na kar de */}
 						<button type="button" className={StyleSign.btn2}>
 							I already have an account
