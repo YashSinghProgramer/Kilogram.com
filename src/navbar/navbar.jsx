@@ -99,6 +99,7 @@ function Navbar() {
 					</li>
 					<li>
 						<img
+							className={Style.create}
 							src="https://img.icons8.com/?size=100&id=TDaRPAsMt1Bs&format=png&color=ffffff"
 							alt="Logo"
 						/>
