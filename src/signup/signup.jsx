@@ -12,17 +12,20 @@ function Signup() {
 	const [password, setpassword] = useState("");
 	const [username, setusername] = useState("");
 	const [error, seterror] = useState(false);
-
+	const [isLoading, setIsLoading] = useState(false);
 	async function noref(e) {
 		e.preventDefault();
 		try {
 			// Clean syntax: .then() hata kar seedha response ko variable mein liya
-			const res = await axios.post("http://localhost:5000/signup", {
-				username,
-				password,
-				email,
-				name, // Agar backend mein name bhi save karwana hai toh
-			});
+			const res = await axios.post(
+				"https://kilogram-com-1.onrender.com/signup",
+				{
+					username,
+					password,
+					email,
+					name, // Agar backend mein name bhi save karwana hai toh
+				},
+			);
 
 			// res.body ki jagah res.data use kiya
 			if (res.data && res.data.message !== "Username already exists") {
@@ -34,6 +37,7 @@ function Signup() {
 		} catch (error) {
 			console.error("Signup error:", error);
 			seterror(true);
+			setIsLoading(false);
 		}
 	}
 
@@ -116,8 +120,15 @@ function Signup() {
 						use this information to provide, personalize and improve our
 						products, including ads.
 					</h3>
-					<button type="submit" className={StyleSign.submitbtn}>
-						Submit
+					<button
+						type="submit"
+						disabled={isLoading}
+						className={StyleSign.submitbtn}>
+						{isLoading ? (
+							<div className={StyleSign.spinner}></div>
+						) : (
+							"Create Account"
+						)}
 					</button>
 					<Link to={"/"} className={StyleSign.Link}>
 						{/* type="button" lagaya taaki ye button form ko submit na kar de */}

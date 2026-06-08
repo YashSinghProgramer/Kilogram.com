@@ -46,7 +46,8 @@
 
 .menulist > ul > li,
 .proli,
-.home {
+.home,
+.create {
 	color: white;
 	margin-left: 8px;
 	transition: all 0.3s ease;
@@ -66,10 +67,13 @@
 	width: 90%;
 	border-bottom: none;
 }
-
+.creatlink {
+	text-decoration: none;
+}
 .menulist > ul > li > img,
 .prologo,
-.homeimg {
+.homeimg,
+.create > img {
 	height: 25px;
 	width: 25px;
 }
@@ -81,7 +85,8 @@
 
 	cursor: pointer;
 }
-.proli:hover {
+.proli:hover,
+.create:hover {
 	background: rgba(128, 128, 128, 0.8);
 	padding: 10px 14px;
 	transform: translateX(4px);
@@ -151,13 +156,14 @@ h4 > img {
 	.Messages,
 	.Deshboard,
 	.Explore,
-	.create {
-		display: none;
+	.search {
+		display: none !important;
 	}
 	/* 5. Text ko hide karna aur sirf icon dikhana */
 	.menulist > ul > li,
 	.proli,
 	.home,
+	.create,
 	h4 {
 		font-size: 0; /* Isse text dikhna band ho jayega */
 		width: auto;

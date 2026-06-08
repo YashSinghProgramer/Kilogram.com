@@ -25,26 +25,32 @@ function Profile() {
 					return;
 				}
 
-				const response = await axios.get(
-					"https://kilogram-com-1.onrender.com/getprofile",
-					{
+				// Optimization: Dono API calls ko ek saath parallel chalaya
+				const [profileRes, postRes] = await Promise.all([
+					axios.get("https://kilogram-com-1.onrender.com/getprofile", {
 						headers: {
 							Authorization: `Bearer ${token}`,
 							"Content-Type": "application/json",
 						},
-					},
-				);
+					}),
+					axios.get("https://kilogram-com-1.onrender.com/getpost", {
+						headers: {
+							Authorization: `Bearer ${token}`,
+							"Content-Type": "application/json",
+						},
+					}),
+				]);
 
-				const data = response.data;
+				const profileData = profileRes.data;
 
-				// Backend 'success: true' bhejta hai
-				if (data.success) {
+				if (profileData.success) {
 					setUserData({
-						username: data.username,
-						name: data.name,
-						bio: data.bio,
-						profilepic: data.profilepic, // Backend se mila hua string URL
-						posts: data.posts || [],
+						username: profileData.username,
+						name: profileData.name,
+						bio: profileData.bio,
+						profilepic: profileData.profilepic,
+						// Agar pichle wale getpost route ko badla hai toh seedha postRes.data.posts aayega
+						posts: postRes.data.posts || [],
 					});
 				}
 			} catch (err) {
@@ -113,8 +119,9 @@ function Profile() {
 							userData.posts.map((post, idx) => (
 								<img
 									key={post._id || idx}
-									src={post.imageUrl || post.url}
+									src={post.postimg}
 									alt="post"
+									className={Profilecss.userSinglePost}
 								/>
 							))
 						) : (

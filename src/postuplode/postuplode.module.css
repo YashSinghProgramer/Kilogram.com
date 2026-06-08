@@ -1,0 +1,80 @@
+.PostCon {
+	height: 100vh;
+	width: 100vw;
+	background-color: rgb(18, 18, 18);
+	transition: all 0.6s ease;
+	display: flex;
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+}
+.postcon {
+	height: 90%;
+	width: 40%;
+	background: white;
+	border-radius: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.postcon > input,
+.postcon > button {
+	width: 80%;
+	color: black;
+}
+.postcon > button {
+	background: red;
+	font-size: x-large;
+	font-weight: 600;
+	color: white;
+	opacity: 0.6;
+	transition: all 0.8s ease;
+	margin-bottom: 20px;
+}
+.postcon > button:hover {
+	background-color: green;
+	opacity: 1;
+}
+.postcon > button:active {
+	transform: scale(0.6);
+}
+.postheader {
+	/* background-color: aquamarine; */
+	width: 100%;
+	height: 50%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+.postheader > img {
+	height: 60px;
+	width: 60px;
+	aspect-ratio: 1/1;
+	margin-left: 12px;
+	margin-top: 12px;
+	border-radius: 50%;
+}
+.postheader > h2 {
+	height: 60px;
+	display: flex;
+	align-items: center;
+	/* background: red; */
+	margin-left: 12px;
+	margin-top: 12px;
+	font-size: x-large;
+	font-weight: 400;
+}
+
+@media (max-width: 768px) {
+	.PostCon {
+		scrollbar-width: none;
+		overflow: hidden;
+	}
+	.postcon {
+		height: 60%;
+		width: 80%;
+	}
+}

@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 	// Yeh sahi hain kyunki followers/following/posts hamesha multiple (Array) hote hain
 	followers: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 	following: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-	post: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
+	post: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
 	bookmark: { type: mongoose.Schema.Types.ObjectId, ref: "Post" },
 });
 

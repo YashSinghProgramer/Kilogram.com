@@ -10,6 +10,7 @@ function Navbar() {
 		navigate("/");
 		localStorage.removeItem("token");
 	}
+
 	useEffect(() => {
 		const fetchNavbarProfile = async () => {
 			try {
@@ -49,7 +50,7 @@ function Navbar() {
 			</div>
 			<div className={Style.menulist}>
 				<ul>
-					<Link to={"/Main"}>
+					<Link to={"/Main"} className={Style.creatlink}>
 						<li className={Style.home}>
 							<img
 								className={Style.homeimg}
@@ -77,6 +78,7 @@ function Navbar() {
 					</li>
 					<li>
 						<img
+							className={Style.Explore}
 							src="https://img.icons8.com/?size=100&id=59878&format=png&color=ffffff"
 							alt="Logo"
 						/>
@@ -97,14 +99,15 @@ function Navbar() {
 						/>
 						Notifications
 					</li>
-					<li>
-						<img
-							className={Style.create}
-							src="https://img.icons8.com/?size=100&id=TDaRPAsMt1Bs&format=png&color=ffffff"
-							alt="Logo"
-						/>
-						Create
-					</li>
+					<Link to={"/Postupload"} className={Style.creatlink}>
+						<li className={Style.create}>
+							<img
+								src="https://img.icons8.com/?size=100&id=TDaRPAsMt1Bs&format=png&color=ffffff"
+								alt="Logo"
+							/>
+							Create
+						</li>
+					</Link>
 					<li>
 						<img
 							className={Style.Deshboard}
@@ -113,7 +116,10 @@ function Navbar() {
 						/>
 						Dashboard
 					</li>
-					<Link to={"/Profile"} className={Style.profilelink}>
+					<Link
+						to={"/Profile"}
+						className={Style.profilelink}
+						className={Style.creatlink}>
 						<li className={Style.proli}>
 							<img
 								src={

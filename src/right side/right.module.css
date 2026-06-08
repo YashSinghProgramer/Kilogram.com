@@ -19,6 +19,9 @@
 	gap: 20px;
 	animation: fadein 1s 1 ease;
 }
+.Link {
+	text-decoration: none;
+}
 .dete > h4 {
 	font-size: large;
 	color: white;
@@ -142,9 +145,6 @@
 	font-weight: 600;
 	text-decoration: none;
 }
-.Link {
-	text-decoration: none;
-}
 .crebtn:hover {
 	background: rgba(128, 128, 128, 0.15);
 }
@@ -205,7 +205,6 @@ h5 > img {
 		display: none;
 	}
 }
-
 /* Button jab disabled ho tab thoda alag dikhe */
 .loginBtn:disabled {
 	background-color: #555555;

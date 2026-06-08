@@ -90,7 +90,7 @@ app.post("/login", async (req, res) => {
 		const token = jwt.sign(
 			{ username: user.username },
 			process.env.JWT_SECRET,
-			{ expiresIn: "1h" },
+			{ expiresIn: "1d" },
 		);
 
 		res.cookie("token", token, {
@@ -218,7 +218,103 @@ app.get("/getprofile", async (req, res) => {
 	}
 });
 
-// SERVER START (Agar aap is file ko main file ki tarah run kar rahe hain)
+app.post("/Postuplode", upload.single("postPic"), async (req, res) => {
+	try {
+		if (!req.file) {
+			return res.status(400).json({ message: "File was not uploaded" });
+		}
+
+		const authHeader = req.headers.authorization;
+		if (!authHeader || !authHeader.startsWith("Bearer ")) {
+			return res.status(401).json({ message: "Unauthorized! Token missing." });
+		}
+
+		const token = authHeader.split(" ")[1];
+		let decoded;
+		try {
+			decoded = jwt.verify(token, process.env.JWT_SECRET);
+		} catch (err) {
+			return res.status(401).json({ message: "Invalid or Expired Token!" });
+		}
+
+		const user = await userModel.findOne({ username: decoded.username });
+		if (!user) {
+			return res.status(404).json({ message: "User not found!" });
+		}
+
+		console.log("Uploading post image to ImageKit...");
+		const img_data = await uploadImage(req.file.buffer);
+		console.log("Post image uploaded successfully!");
+
+		// Debugging ke liye terminal mein dekhne ke liye (Ki ImageKit kya de raha hai)
+		console.log("ImageKit URL:", img_data?.url);
+
+		const { caption } = req.body;
+
+		// FIXED: 'postimg' ki jagah 'img' kiya jo tumhare Schema se match karta hai
+		const newPost = await PostModel.create({
+			postimg: img_data.url || img_data.secure_url,
+			caption: caption || "",
+			author: user._id,
+		});
+
+		user.post.push(newPost._id);
+		await user.save();
+
+		return res.status(201).json({
+			success: true,
+			message: "Post created successfully! 🎉",
+			post: newPost,
+		});
+	} catch (error) {
+		console.error("Post Upload Server Error:", error);
+		return res.status(500).json({
+			message: "Server error while sharing post!",
+			error: error.message,
+		});
+	}
+});
+
+app.get("/getpost", async (req, res) => {
+	try {
+		const authHeader = req.headers.authorization;
+		if (!authHeader || !authHeader.startsWith("Bearer ")) {
+			return res.status(401).json({ message: "Authentication failed!" });
+		}
+
+		const token = authHeader.split(" ")[1];
+
+		let decoded;
+		try {
+			decoded = jwt.verify(token, process.env.JWT_SECRET);
+		} catch (jwtErr) {
+			return res.status(401).json({ message: "Invalid or Expired Token!" });
+		}
+
+		const username = decoded.username;
+
+		// 1. Ek hi baar mein user ko dhoondha aur uske andar ke 'post' array ko POPULATE kiya
+		const user = await userModel
+			.findOne({ username: username })
+			.select("-password")
+			.populate("post"); // <-- Isse IDs ki jagah asli post ka data mil jayega
+
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		// 2. Response bheja (Ab 'posts' dhoondne ki alag se zaroorat nahi)
+		return res.status(200).json({
+			success: true,
+			username: user.username,
+			profilepic: user.profile || user.profilepic || "",
+			posts: user.post || [],
+		});
+	} catch (e) {
+		console.log("Get Post Server Error:", e);
+		return res.status(500).json({ message: "Server Error", error: e.message }); // Catch block mein response dena zaroori hai warna frontend load hota rahega
+	}
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);

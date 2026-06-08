@@ -15,7 +15,7 @@ function Right() {
 		e.preventDefault();
 		try {
 			setIsLoading(true);
-
+			// FIXED: check kar lena backend ka port 3000 h ya 5000
 			const response = await axios.post(
 				"https://kilogram-com-1.onrender.com/login",
 				{ username, password },
@@ -25,6 +25,7 @@ function Right() {
 			setpassword("");
 
 			if (response.data.message === "Login successful") {
+				// FIXED: Agar backend token de rha h, toh use localStorage me daal do profile page k liye
 				if (response.data.token) {
 					localStorage.setItem("token", response.data.token);
 				}
@@ -54,7 +55,7 @@ function Right() {
 	return (
 		<div className={style.rightcon}>
 			<div className={style.dete}>
-				<p className={style.loginHeading}>Log into Kilogram</p>
+				{/* <p className={style.loginHeading}>Log into Kilogram</p> */}
 				<h4>Log into Kilogram</h4>
 				<div>
 					<form className={style.logform} onSubmit={norefersh}>

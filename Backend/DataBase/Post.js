@@ -4,8 +4,6 @@ async function connectDB() {
 	try {
 		await mongoose.connect(
 			"mongodb+srv://yashsinghprogramer_db_user:Yash%40123@kilogram.zikcb8u.mongodb.net/UserLoginDB",
-			// TIP: Alag-alag file mein naya connection banane ke bajay, poore project ke liye ek hi
-			// connection kaafi hota hai (UserLoginDB waala). Mongo apne aap usme 'posts' collection bana dega.
 		);
 		console.log("Connected to the Posts database successfully");
 	} catch (err) {
@@ -15,13 +13,13 @@ async function connectDB() {
 connectDB();
 
 const PostSchema = new mongoose.Schema({
-	img: {
+	postimg: {
 		type: String,
 		required: true,
-		unique: true,
+		// unique: true,
 	},
 	caption: {
-		type: String, // <--- FIX: Yahan 'type: String' likhna zaroori tha
+		type: String,
 		default: "",
 	},
 	author: {

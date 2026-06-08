@@ -20,7 +20,7 @@ function Uplode() {
 		}
 
 		const formData = new FormData();
-		// FIXED: "myfile" ko badal kar "profilePic" kiya taaki backend se match kare
+
 		formData.append("profilePic", file);
 
 		// Agar aap bio ya baaki cheezein bhi bhej rahe hain, toh aise add kar sakte hain:
@@ -31,7 +31,7 @@ function Uplode() {
 			const token = localStorage.getItem("token");
 
 			const response = await axios.post(
-				"https://kilogram-com-1.onrender.com/profileupload",
+				"http://localhost:5000/profileupload",
 				formData,
 				{
 					headers: {
