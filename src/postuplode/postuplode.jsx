@@ -38,12 +38,15 @@ function postuplode() {
 	async function fecthdata() {
 		const token = localStorage.getItem("token");
 		if (!token) return;
-		const userdata = await axios.get("http://localhost:5000/getprofile", {
-			headers: {
-				Authorization: `Bearer ${token}`,
-				"Content-Type": "application/json",
+		const userdata = await axios.get(
+			"https://kilogram-com-1.onrender.com/getprofile",
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
 			},
-		});
+		);
 
 		setusername(userdata.data.username);
 		setprofile(userdata.data.profilepic);
