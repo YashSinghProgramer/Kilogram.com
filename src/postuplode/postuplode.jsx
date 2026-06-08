@@ -19,7 +19,7 @@ function postuplode() {
 		if (!token) return;
 		try {
 			const userpost = await axios.post(
-				"http://localhost:5000/Postuplode",
+				"https://kilogram-com-1.onrender.com/Postuplode",
 				formData, // <-- 4. Sahi data (formData) bheja
 				{
 					headers: {
