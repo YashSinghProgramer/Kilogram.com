@@ -49,6 +49,14 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
+				<Route
+					path="/Profileupdate"
+					element={
+						<ProtectedRoute>
+							<Updateprofile />
+						</ProtectedRoute>
+					}
+				/>
 			</Routes>
 		</div>
 	);

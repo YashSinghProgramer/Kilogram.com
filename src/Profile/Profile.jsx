@@ -108,7 +108,7 @@ function Profile() {
 							</div>
 						</div>
 						<div className={Profilecss.profilebtn}>
-							<Link to={"/Profileupate"} className={Profilecss.Editprofilebtn}>
+							<Link to={"/Profileupdate"} className={Profilecss.Editprofilebtn}>
 								<button>Edit Profile</button>
 							</Link>
 							<button>View </button>
