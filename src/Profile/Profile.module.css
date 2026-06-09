@@ -236,7 +236,9 @@
 		top: 70%;
 		right: 10%;
 	}
-
+	.Editprofilebtn {
+		width: 50%;
+	}
 	/* Profile text settings */
 	.profiletext {
 		align-items: center;
