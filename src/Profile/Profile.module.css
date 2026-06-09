@@ -105,7 +105,8 @@
 	justify-content: flex-start;
 }
 
-.profilebtn > button {
+.profilebtn > button,
+.Editprofilebtn > button {
 	border: none;
 	height: 40px;
 	font-size: medium;
@@ -191,7 +192,10 @@
 	height: 200px;
 	flex-direction: row;
 }
-
+.Editprofilebtn {
+	width: 90%;
+	text-decoration: none;
+}
 @media (max-width: 768px) {
 	/* Main container se side navigation ka access hatao */
 	.con {

@@ -315,6 +315,68 @@ app.get("/getpost", async (req, res) => {
 		return res.status(500).json({ message: "Server Error", error: e.message }); // Catch block mein response dena zaroori hai warna frontend load hota rahega
 	}
 });
+
+// 1. Yahan upload.single("profilePic") joda taaki photo handle ho sake
+app.post("/updateprofile", upload.single("profilePic"), async (req, res) => {
+	try {
+		const authHeader = req.headers.authorization;
+		if (!authHeader || !authHeader.startsWith("Bearer ")) {
+			return res.status(401).json({ message: "Authentication failed!" });
+		}
+
+		const token = authHeader.split(" ")[1];
+		let decoded;
+		try {
+			decoded = jwt.verify(token, process.env.JWT_SECRET);
+		} catch (jwtErr) {
+			return res.status(401).json({ message: "Invalid or Expired Token!" });
+		}
+
+		// Token se purana username nikala (Taki user dhoond sakein)
+		const oldUsername = decoded.username;
+		const user = await userModel.findOne({ username: oldUsername });
+
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		// 1. FIXED: Frontend se 'userBio' aur 'username' dono ko sahi se nikala
+		const { username, name, Bio } = req.body;
+
+		// Ek object banaya jisme sirf wahi data dalenge jo frontend se aaya hai
+		let updateData = {};
+		if (name) updateData.name = name;
+
+		// Agar user ne naya username type kiya hai toh use bhi badlo
+		if (username) updateData.username = username;
+		if (Bio !== undefined) {
+			updateData.Bio = Bio;
+		}
+		// 2. EXTRA SAFETY: Agar is route par koi image aati hai toh use bhi data mein jod do
+		if (req.file) {
+			updateData.profilepic = req.file.path; // Apne model ke hisab se 'profilepic' ya 'profilePic' check kar lena
+		}
+
+		// 3. FIXED: Purane username ke bhuwate dhoonda aur naye data se update kiya
+		const updatedUser = await userModel
+			.findOneAndUpdate(
+				{ username: oldUsername }, // Token wale purane username se dhoondo
+				{ $set: updateData },
+				{ returnDocument: "after" },
+			)
+			.select("-password");
+
+		return res.status(200).json({
+			success: true,
+			message: "Profile updated successfully! 🎉",
+			user: updatedUser,
+		});
+	} catch (e) {
+		console.error("Update Profile Error:", e);
+		return res.status(500).json({ message: "Server Error", error: e.message });
+	}
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);

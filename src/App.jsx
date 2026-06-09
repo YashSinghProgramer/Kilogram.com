@@ -7,6 +7,7 @@ import Uplode from "./Profile/uplode.jsx";
 import Postupload from "./postuplode/postuplode.jsx";
 import { Route, Router, Routes } from "react-router-dom";
 import ProtectedRoute from "./protectrouter.jsx";
+import Updateprofile from "./UpdateProfile/profileupdate.jsx";
 function App() {
 	return (
 		<div>
