@@ -31,7 +31,7 @@ function Uplode() {
 			const token = localStorage.getItem("token");
 
 			const response = await axios.post(
-				"http://localhost:5000/profileupload",
+				"https://kilogram-com-1.onrender.com/profileupload",
 				formData,
 				{
 					headers: {
