@@ -8,7 +8,7 @@ function Profile() {
 	const [userData, setUserData] = useState({
 		username: "Loading...",
 		name: "Loading...",
-		bio: "",
+		Bio: "",
 		posts: [],
 		profilepic: "",
 	});
@@ -47,7 +47,7 @@ function Profile() {
 					setUserData({
 						username: profileData.username,
 						name: profileData.name,
-						bio: profileData.bio,
+						Bio: profileData.Bio,
 						profilepic: profileData.profilepic,
 						// Agar pichle wale getpost route ko badla hai toh seedha postRes.data.posts aayega
 						posts: postRes.data.posts || [],
@@ -104,7 +104,7 @@ function Profile() {
 									<h3>24 follower</h3>
 									<h3>50 following</h3>
 								</div>
-								<h4>{userData.bio}</h4>
+								<h4>{userData.Bio}</h4>
 							</div>
 						</div>
 						<div className={Profilecss.profilebtn}>

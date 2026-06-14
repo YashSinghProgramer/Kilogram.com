@@ -309,6 +309,7 @@ app.get("/getpost", async (req, res) => {
 			username: user.username,
 			profilepic: user.profile || user.profilepic || "",
 			posts: user.post || [],
+			Bio: user.Bio,
 		});
 	} catch (e) {
 		console.log("Get Post Server Error:", e);
