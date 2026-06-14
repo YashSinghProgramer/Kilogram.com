@@ -208,7 +208,7 @@ app.get("/getprofile", async (req, res) => {
 			success: true,
 			username: user.username,
 			name: user.name || "",
-			bio: user.bio || "No bio yet",
+			Bio: user.Bio || "No bio yet",
 			profilepic: user.profile || user.profilepic,
 			posts: posts || [],
 		});
@@ -309,7 +309,6 @@ app.get("/getpost", async (req, res) => {
 			username: user.username,
 			profilepic: user.profile || user.profilepic || "",
 			posts: user.post || [],
-			Bio: user.Bio,
 		});
 	} catch (e) {
 		console.log("Get Post Server Error:", e);
