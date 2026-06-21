@@ -11,6 +11,7 @@ const PostModel = require("../DataBase/Post.js");
 const CommentModel = require("../DataBase/Comments.js");
 const multer = require("multer");
 const uploadImage = require("../DataBase/imagekit.js");
+const console = require("console");
 require("dotenv").config();
 const app = express();
 
@@ -212,6 +213,7 @@ app.get("/getprofile", async (req, res) => {
 			profilepic: user.profile || user.profilepic,
 			posts: posts || [],
 		});
+		console.log(Bio);
 	} catch (error) {
 		console.error("Get Profile Error:", error);
 		return res.status(500).json({ message: "Server Error!" });
